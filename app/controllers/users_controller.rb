@@ -25,13 +25,14 @@ def create
     render 'new'
   end
 end
+
 def edit
 end
 
 
 
 def update 
-  @user = User.find(params[:id])
+  # @user = User.find(params[:id])
   if @user.update_attributes(user_params)
     flash[:success]= "Profile updated"
     redirect_to @user
@@ -62,7 +63,7 @@ end
 
 def correct_user
   @user = User.find(params[:id])
-  redirect_to(root_url) unless @user == current_user
+  redirect_to(root_url) unless current_user?(@user)
 end 
 
 def admin_user
